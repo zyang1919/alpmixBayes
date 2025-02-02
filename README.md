@@ -77,7 +77,7 @@ fit_ew  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "EW")   # Exp
 fit_ll  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "LL")   # Lognormal-Lognormal
 fit_ewg <- alpmixBayes(data, mcmc_values, init_values, survmodel = "EWG")  # Exponential-Weibull-Gamma
 ```
-## 📖 5️⃣ Documentation
+## 📖 Documentation
 
 
 
