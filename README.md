@@ -68,9 +68,7 @@ source("alpmixBayes.R")
     - `th2p = c(1,1)`: Prior for `th2`, assuming a **Gamma(1,1)** distribution. 
     - `th3p = c(1,1)`: Prior for `th3, assuming a **Gamma(1,1)** distribution.
 
-
- 
-
+---
 
 ## 2️⃣ Fit a Model
 ## Example dataset (replace with your actual data)
@@ -105,6 +103,25 @@ Parameter Estimates (with 95% Credible Intervals):
 3       th1 0.4936465 0.4754862 0.5226008
 4       th2 1.0061340 0.9837623 1.0317516
 ```
+### **Value**
+The function returns a **list** containing the following elements:
+
+- **`model`**: A string indicating the mixture model used. This will be one of `"WW"`, `"EW"`, `"LL"`, or `"EWG"`.  
+- **`estimates`**: A data frame containing parameter estimates and their **95% credible intervals**. The structure varies depending on the model:
+  - For **two-component models** (`"WW"`, `"EW"`, `"LL"`), the data frame includes:
+    - `alpha`: Posterior mean estimate for the transformation parameter.
+    - `p`: Posterior mean estimate for the mixing proportion.
+    - `th1`, `th2`: Posterior mean estimates for the component parameters.
+    - `Lower_95`, `Upper_95`: Lower and upper bounds of the 95% credible interval.
+  - For **three-component models** (`"EWG"`), the data frame includes:
+    - `alpha`: Posterior mean estimate for the transformation parameter.
+    - `p1`, `p2`: Posterior mean estimates for the first and second mixture proportions.
+    - `th1`, `th2`, `th3`: Posterior mean estimates for the component parameters.
+    - `Lower_95`, `Upper_95`: Lower and upper bounds of the 95% credible interval.
+- **`mcmc_samples`**: A matrix containing MCMC posterior draws for each parameter (optional, depending on user settings).  
+- **`data`**: The original dataset used for model fitting.  
+- **`call`**: The matched function call, displaying the arguments used in the function.  
+
 
 ## 📊 Model Options
 You can specify which mixture model to use with the ```survmodel``` argument:
@@ -114,7 +131,7 @@ fit_ew  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "EW")   # Exp
 fit_ll  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "LL")   # Lognormal-Lognormal
 fit_ewg <- alpmixBayes(data, mcmc_values, init_values, survmodel = "EWG")  # Exponential-Weibull-Gamma
 ```
-## 📖 Documentation
+
 
 
 
