@@ -1,22 +1,22 @@
 # alpmixBayes
 
-**alpmixBayes** is an R package for Bayesian model fitting of alpha mixture survival models. It provides implementations for multiple mixture models, including Weibull-Weibull, Exponential-Weibull, Lognormal-Lognormal, and Exponential-Weibull-Gamma mixtures.
+**alpmixBayes** is an R package for Bayesian alpha mixture survival models. It provides Bayesian estimation for alpha mixture models, including Weibull-Weibull mixture, Exponential-Weibull mixture, Lognormal-Lognormal mixture, and Exponential-Weibull-Gamma mixtures.
 
 ## 📌 Features
-- Implements **four Bayesian mixture models**:
-  - **Weibull-Weibull Mixture** (`wwmix`)
-  - **Exponential-Weibull Mixture** (`ewmix`)
-  - **Lognormal-Lognormal Mixture** (`llmix`)
-  - **Exponential-Weibull-Gamma Mixture** (`ewgmix`)
-- Supports **MCMC sampling** with user-defined priors.
-- Provides **credible intervals** for parameter estimates.
+- Implements four Bayesian alpha mixture models under different distributions:
+  - Weibull-Weibull Mixture (`wwmix`)
+  - Exponential-Weibull Mixture (`ewmix`)
+  - Lognormal-Lognormal Mixture (`llmix`)
+  - Exponential-Weibull-Gamma Mixture (`ewgmix`)
+- Supports MCMC sampling, priors, and initial values options.
+- Provides credible intervals for parameter estimates.
 - Easily compare different mixture models using `summary()`.
 ---
 ### **Arguments**
 - **`d`**: A numeric vector of observed survival times. The input data should represent non-negative and non-censered survival times.
 - **`mcmc_values`**: A list containing MCMC settings:
-  - `nburn`: Number of burn-in iterations. Default value is 1,000. 
-  - `niter`: Total number of MCMC iterations. Default value is 5,000. 
+  - `nburn`: Number of burning iterations. Default value is 1,000. 
+  - `niter`: Collections of MCMC iterations. Default value is 5,000. 
   - `thin`: Thinning interval (e.g., if `thin = 2`, every second iteration is kept). Default value is 1.
 - **`init_values`**: A list specifying initial values for parameters. The required parameters depend on the chosen mixture model:
   - For **two-component models** (`"WW"`, `"EW"`, `"LL"`):  
@@ -39,7 +39,7 @@
     - `th1p = c(1,1)`: Prior for `th1`, assuming a **Gamma(1,1)** distribution.  
     - `th2p = c(1,1)`: Prior for `th2`, assuming a **Gamma(1,1)** distribution.  
   - For **three-component model** (`"EWG"`):
-    - `ap = c(0,0.001)`: Prior for the mixing power, assuming a **Normal(0, 0.001²)** distribution.   
+    - `ap = c(1,0.001)`: Prior for the mixing power, assuming a **Normal(1, 0.001²)** distribution.   
     - `pp = c(1,1,1)`: Prior for the mixture proportion, assuming a **Dirichlet(1,1)** distribution. 
     - `th1p = c(1,1)`: Prior for `th1`, assuming a **Gamma(1,1)** distribution. 
     - `th2p = c(1,1)`: Prior for `th2`, assuming a **Gamma(1,1)** distribution. 
@@ -92,8 +92,14 @@ mcmc_values <- list(nburn = 1000, niter = 5000, thin = 1)
 # Define initial values
 init_values <- list(alpha = 1, p = 0.5, th1 = 2, th2 = 2)
 
+# Define prior values
+# two-component mixture
+prior <- list(ap=c(0,0.001),pp=c(1,1),th1p=c(1,1),th2p=c(1,1))
+# three-component mixture
+prior <- list(ap=c(1,0.001),pp=c(1,1,1),th1p=c(1,1),th2p=c(1,1),th3p=c(1,1))
+
 # Fit a Weibull-Weibull mixture model
-fit <- alpmixBayes(data, mcmc_values, init_values, survmodel = "WW")
+fit <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "WW")
 
 # Print results
 print(fit)
@@ -120,10 +126,10 @@ Parameter Estimates (with 95% Credible Intervals):
 ## 📊 Model Options
 You can specify which mixture model to use with the ```survmodel``` argument:
 ```r
-fit_ww  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "WW")   # Weibull-Weibull
-fit_ew  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "EW")   # Exponential-Weibull
-fit_ll  <- alpmixBayes(data, mcmc_values, init_values, survmodel = "LL")   # Lognormal-Lognormal
-fit_ewg <- alpmixBayes(data, mcmc_values, init_values, survmodel = "EWG")  # Exponential-Weibull-Gamma
+fit_ww  <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "WW")   # Weibull-Weibull
+fit_ew  <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "EW")   # Exponential-Weibull
+fit_ll  <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "LL")   # Lognormal-Lognormal
+fit_ewg <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "EWG")  # Exponential-Weibull-Gamma
 ```
 
 ### **Authors**
@@ -132,8 +138,6 @@ This package was developed by:
 - **[Feng Luan](https://github.com/Feng-Luan)** – Lead developer  
 - **[Duchwan Ryu](https://github.com/Author2Username)** – Contributor  
 - **[Zhexuan Yang](https://github.com/zyang1919)** – Contributor  
-
-For questions, feature requests, or bug reports, please open an issue. 
 
 
 
