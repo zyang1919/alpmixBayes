@@ -131,7 +131,7 @@ This package was developed by:
 
 - **[Feng Luan](https://github.com/Author1Username)** – Lead developer  
 - **[Duchwan Ryu](https://github.com/Author2Username)** – Contributor  
-- **[Zhexuan Yang](https://github.com/Author3Username)** – Contributor  
+- **[Zhexuan Yang](https://github.com/zyang1919)** – Contributor  
 
 For questions, feature requests, or bug reports, please open an issue on [GitHub](https://github.com/your-repo-url/issues).  
 
