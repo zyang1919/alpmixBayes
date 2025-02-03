@@ -34,6 +34,43 @@ source("your path/alpmixBayes/alpmixBayes.R")
 ```r
 source("alpmixBayes.R")
 ```
+---
+### **Arguments**
+- **`d`**: A numeric vector of observed survival times. The input data should represent non-negative and non-censered survival times.
+- **`mcmc_values`**: A list containing MCMC settings:
+  - `nburn`: Number of burn-in iterations. Default value is 1,000. 
+  - `niter`: Total number of MCMC iterations. Default value is 5,000. 
+  - `thin`: Thinning interval (e.g., if `thin = 2`, every second iteration is kept). Default value is 1.
+- **`init_values`**: A list specifying initial values for parameters. The required parameters depend on the chosen mixture model:
+  - For **two-component models** (`"WW"`, `"EW"`, `"LL"`):  
+    - `alpha`: Initial value for the mixing power parameter. Default value is 1. 
+    - `p`: Initial mixing proportion. Default value is 0.5. 
+    - `th1`, `th2`: Initial values for the two scale parameters. Default values are 1 and 1. 
+  - For **three-component model** (`"EWG"`):  
+    - `alpha`: Initial value for the mixing power parameter. Default value is 1.
+    - `p1`, `p2`: Initial mixing proportions.Default value is 0.5. Default values are 0.3 and 0.3. 
+    - `th1`, `th2`, `th3`: Initial values for the three scale parameters. Default values are 1, 1, and 1. 
+- **`survmodel`**: A string indicating the mixture model to use. The available options are:
+  - `"WW"`: Weibull-Weibull Mixture  
+  - `"EW"`: Exponential-Weibull Mixture  
+  - `"LL"`: Lognormal-Lognormal Mixture  
+  - `"EWG"`: Exponential-Weibull-Gamma Mixture
+- **`prior`**: A list specifying hyperparameters for Bayesian priors. If `prior = NULL`, default values are used:
+  - For **two-component models** (`"WW"`, `"EW"`, `"LL"`):
+    - `ap = c(0,0.001)`: Prior for the mixing power, assuming a **Normal(0, 0.001²)** distribution. 
+    - `pp = c(1,1)`: Prior for the mixture proportion, assuming a **Beta(1,1)** distribution. 
+    - `th1p = c(1,1)`: Prior for `th1`, assuming a **Gamma(1,1)** distribution.  
+    - `th2p = c(1,1)`: Prior for `th2`, assuming a **Gamma(1,1)** distribution.  
+  - For **three-component model** (`"EWG"`):
+    - `ap = c(0,0.001)`: Prior for the mixing power, assuming a **Normal(0, 0.001²)** distribution.   
+    - `pp = c(1,1,1)`: Prior for the mixture proportion, assuming a **Dirichlet(1,1)** distribution. 
+    - `th1p = c(1,1)`: Prior for `th1`, assuming a **Gamma(1,1)** distribution. 
+    - `th2p = c(1,1)`: Prior for `th2`, assuming a **Gamma(1,1)** distribution. 
+    - `th3p = c(1,1)`: Prior for `th3, assuming a **Gamma(1,1)** distribution.
+
+
+ 
+
 
 ## 2️⃣ Fit a Model
 ## Example dataset (replace with your actual data)
