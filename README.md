@@ -94,9 +94,9 @@ init_values <- list(alpha = 1, p = 0.5, th1 = 2, th2 = 2)
 
 # Define prior values
 # two-component mixture
-prior <- list(ap=c(0,0.001),pp=c(1,1),th1p=c(1,1),th2p=c(1,1))
+prior <- list(ap=c(0,0.001), pp=c(1,1), th1p=c(1,1), th2p=c(1,1))
 # three-component mixture
-prior <- list(ap=c(1,0.001),pp=c(1,1,1),th1p=c(1,1),th2p=c(1,1),th3p=c(1,1))
+prior <- list(ap=c(1,0.001), pp=c(1,1,1), th1p=c(1,1), th2p=c(1,1), th3p=c(1,1))
 
 # Fit a Weibull-Weibull mixture model
 fit <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "WW")
