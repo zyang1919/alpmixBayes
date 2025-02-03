@@ -43,7 +43,7 @@
     - `pp = c(1,1,1)`: Prior for the mixture proportion, assuming a **Dirichlet(1,1)** distribution. 
     - `th1p = c(1,1)`: Prior for `th1`, assuming a **Gamma(1,1)** distribution. 
     - `th2p = c(1,1)`: Prior for `th2`, assuming a **Gamma(1,1)** distribution. 
-    - `th3p = c(1,1)`: Prior for `th3, assuming a **Gamma(1,1)** distribution.
+    - `th3p = c(1,1)`: Prior for `th3`, assuming a **Gamma(1,1)** distribution.
 
 ### **Value**
 The function returns a **list** containing the following elements:
