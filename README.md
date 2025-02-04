@@ -135,9 +135,9 @@ fit_ewg <- alpmixBayes(data, mcmc_values, init_values, prior, survmodel = "EWG")
 ### **Authors**
 This package was developed by:
 
-- **[Feng Luan](https://github.com/Feng-Luan)** – Lead developer  
-- **[Duchwan Ryu](https://github.com/Author2Username)** – Contributor  
-- **[Zhexuan Yang](https://github.com/zyang1919)** – Contributor  
+- **Feng Luan** – Lead developer, coding  
+- **Duchwan Ryu** – Contributor, coding 
+- **Zhexuan Yang** – Contributor, coding, Github  
 
 
 
